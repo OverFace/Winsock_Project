@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{f28cad7b-ea6a-4e54-8642-6d8c4296e4d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object">
+      <UniqueIdentifier>{c431aae1-0a4d-40b2-bdba-e12d6dd517cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\Job">
+      <UniqueIdentifier>{7a027134-f1af-4c11-86ca-f8e33e1f4298}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\Job\Human">
+      <UniqueIdentifier>{3c558260-a9d7-4353-bbdc-40358d786a78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\Job\Police">
+      <UniqueIdentifier>{3aaf6fa2-68e8-403a-a620-1ab95faae815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\Job\Mafia">
+      <UniqueIdentifier>{065791f6-0fa2-4b21-916c-a5c5ea0d01fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\Job\Doctor">
+      <UniqueIdentifier>{be5037fd-f66f-4f71-ab68-fb538bfa39ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.MainGame">
+      <UniqueIdentifier>{0e15d373-e5c4-4ec8-a65b-14deb638e8fc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>01.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>01.Object\Job\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>00.MainGame</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="WinsockProject.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>01.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Human.cpp">
+      <Filter>01.Object\Job\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>00.MainGame</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>99.Default</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
