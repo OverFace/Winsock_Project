@@ -28,6 +28,9 @@
     <Filter Include="01.Object\Voting">
       <UniqueIdentifier>{5a9d103e-db33-4f1c-85f9-5b605a195083}</UniqueIdentifier>
     </Filter>
+    <Filter Include="98.UDP_Client">
+      <UniqueIdentifier>{0d105c9f-2f25-49b3-a076-bca879c0b878}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -53,9 +56,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>99.Default</Filter>
     </ClCompile>
-    <ClCompile Include="WinsockProject.cpp">
-      <Filter>99.Default</Filter>
-    </ClCompile>
     <ClCompile Include="Obj.cpp">
       <Filter>01.Object</Filter>
     </ClCompile>
@@ -67,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="Voting.cpp">
       <Filter>01.Object\Voting</Filter>
+    </ClCompile>
+    <ClCompile Include="WinsockProject.cpp">
+      <Filter>98.UDP_Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

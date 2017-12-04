@@ -1,6 +1,17 @@
+#include "stdafx.h"
 #include "Voting.h"
 
-void voting::check()
+CVoting::CVoting(void)
+{
+
+}
+
+CVoting ::~CVoting(void)
+{
+
+}
+
+void CVoting::check()
 {
 	Info.bCheck = false;
 	Info.iGet_Count = 0;
@@ -18,11 +29,9 @@ void voting::check()
 	{
 		// 기권
 	}
-
-	
 }
 
-void voting::result_f()
+void CVoting::result_f()
 {
 	result[Client] = choice;
 	
@@ -56,7 +65,7 @@ void voting::result_f()
 
 }
 
-void voting::err_quit(char * msg)
+void CVoting::err_quit(char * msg)
 {
 	LPVOID lpMsgBuf;
 	FormatMessage(
@@ -69,7 +78,7 @@ void voting::err_quit(char * msg)
 	exit(1);
 }
 
-void voting::err_display(char * msg)
+void CVoting::err_display(char * msg)
 {
 	LPVOID lpMsgBuf;
 	FormatMessage(
@@ -81,9 +90,8 @@ void voting::err_display(char * msg)
 	LocalFree(lpMsgBuf);
 }
 
-int voting::ResultSendToServer(int argc, char * argv[])
+int CVoting::ResultSendToServer(int argc, char * argv[])
 {
-
 	int retval;
 
 	// 윈속 초기화
@@ -100,11 +108,9 @@ int voting::ResultSendToServer(int argc, char * argv[])
 	ZeroMemory(&serveraddr, sizeof(serveraddr));
 	serveraddr.sin_family = AF_INET;
 	serveraddr.sin_addr.s_addr = inet_addr(SERVERIP);
-	serveraddr.sin_port = htons(SERVERPORT);
+	serveraddr.sin_port = htons(PORTNUMBER);
 	retval = connect(sock, (SOCKADDR *)&serveraddr, sizeof(serveraddr));
 	if (retval == SOCKET_ERROR) err_quit("connect()");
-
-
 
 	// 데이터 보내기
 	retval = send(sock,(char *)choice, BUFSIZE, 0);
