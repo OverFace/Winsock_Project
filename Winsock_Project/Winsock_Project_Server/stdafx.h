@@ -19,9 +19,11 @@
 #pragma comment(lib, "ws2_32")
 #include <WinSock2.h>
 #include <WS2tcpip.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <Windows.h>
 
-#define SERVERPROT 9000
-#define BUFSIZE 512
-
+#include <list>
+#include <vector>
 #include <iostream>
 using namespace std;

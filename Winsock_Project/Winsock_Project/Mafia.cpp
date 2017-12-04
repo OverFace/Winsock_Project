@@ -25,6 +25,7 @@ int CMafia::Update(void)
 void CMafia::Render(void)
 {
 	CObj::Render();
+	cout << "[직  업] : " << "마피아" << endl;
 }
 
 void CMafia::Release(void)

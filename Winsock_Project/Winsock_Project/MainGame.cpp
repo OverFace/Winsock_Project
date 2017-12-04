@@ -2,6 +2,9 @@
 #include "MainGame.h"
 #include "Obj.h"
 
+//Manager
+#include "TimeMgr.h"
+
 //Player
 #include "Doctor.h"
 #include "Human.h"
@@ -21,6 +24,8 @@ CMainGame_Client::~CMainGame_Client(void)
 
 void CMainGame_Client::Init(void)
 {
+	CTimeMgr::GetInstance()->InitTime();
+
 	switch (m_eJobType)
 	{
 	case JOB_HUMAN:
@@ -46,7 +51,7 @@ void CMainGame_Client::Init(void)
 
 int CMainGame_Client::Update(void)
 {
-	Render();
+	CTimeMgr::GetInstance()->SetTime();
 
 	if (m_pPlayer != NULL)
 	{
@@ -58,17 +63,20 @@ int CMainGame_Client::Update(void)
 
 void CMainGame_Client::Render(void)
 {
+	Sleep(500);
 	system("cls");
-	cout << "==========================================" << endl;
-	cout << "||              MAFIA GAME              ||" << endl;
-	cout << "==========================================" << endl;
+	cout << "==================================================================" << endl;
+	cout << "||                         MAFIA GAME                           ||" << endl;
+	cout << "==================================================================" << endl;
 	if (m_pPlayer != NULL)
 		m_pPlayer->Render();
-	cout << "==========================================" << endl;
+	cout << "==================================================================" << endl;
 }
 
 void CMainGame_Client::Release(void)
 {
 	if (m_pPlayer != NULL)
 		delete m_pPlayer;
+
+	CTimeMgr::GetInstance()->DestroyInstance();
 }

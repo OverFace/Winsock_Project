@@ -1,8 +1,14 @@
 #include "stdafx.h"
 #include "MainGame.h"
+#include "Obj.h"
+#include "Moniter.h"
+
+//Manager
+#include "TimeMgr.h"
 
 CMainGame::CMainGame(void)
 {
+	m_pMonitor = NULL;
 }
 
 CMainGame::~CMainGame(void)
@@ -12,17 +18,22 @@ CMainGame::~CMainGame(void)
 
 void CMainGame::Init(void)
 {
-	//초기화 하는 구문.
+	CTimeMgr::GetInstance()->InitTime();
+	m_pMonitor = new CMoniter();
+	m_pMonitor->Init();
 }
 
 int CMainGame::Update(void)
 {
-	//로직 돌리는데
+	CTimeMgr::GetInstance()->SetTime();
+	m_pMonitor->Update();
+	m_pMonitor->Render();
 
 	return 0;
 }
 
 void CMainGame::Release(void)
 {
-	//동적할당 햇으면 해제하는 부분
+	CTimeMgr::GetInstance()->DestroyInstance();
+	delete m_pMonitor;
 }

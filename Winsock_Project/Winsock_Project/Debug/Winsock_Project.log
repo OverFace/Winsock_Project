@@ -1,2 +1,5 @@
-﻿  MainGame.cpp
+﻿  WinsockProject.cpp
+c:\users\june\desktop\mafia_game\winsock_project\winsock_project\winsock_project\winsock_project\winsockproject.cpp : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+c:\users\june\desktop\mafia_game\winsock_project\winsock_project\winsock_project\winsock_project\winsockproject.cpp(65): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\winsock2.h(1830): note: 'inet_addr' 선언을 참조하십시오.
   Winsock_Project.vcxproj -> C:\Users\june\Desktop\Mafia_Game\Winsock_Project\Winsock_Project\Winsock_Project\Debug\Winsock_Project.exe

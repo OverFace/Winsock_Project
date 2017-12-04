@@ -1,5 +1,6 @@
 #pragma once
 
+class CObj;
 class CMainGame
 {
 public:
@@ -7,6 +8,7 @@ public:
 	~CMainGame(void);
 
 private:
+	CObj*	m_pMonitor;
 
 public:
 	void	Init(void);

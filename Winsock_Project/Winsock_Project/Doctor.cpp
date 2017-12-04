@@ -25,6 +25,7 @@ int CDoctor::Update(void)
 void CDoctor::Render(void)
 {
 	CObj::Render();
+	cout << "[직  업] : " << "의사" << endl;
 }
 
 void CDoctor::Release(void)

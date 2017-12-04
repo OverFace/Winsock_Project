@@ -31,6 +31,9 @@
     <Filter Include="98.UDP_Client">
       <UniqueIdentifier>{0d105c9f-2f25-49b3-a076-bca879c0b878}</UniqueIdentifier>
     </Filter>
+    <Filter Include="97.Manager">
+      <UniqueIdentifier>{6d809f1b-5c8c-4347-8374-b9310852961e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -60,6 +63,9 @@
     <ClInclude Include="Police.h">
       <Filter>01.Object\Job\Police</Filter>
     </ClInclude>
+    <ClInclude Include="TimeMgr.h">
+      <Filter>97.Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -88,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="Police.cpp">
       <Filter>01.Object\Job\Police</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeMgr.cpp">
+      <Filter>97.Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

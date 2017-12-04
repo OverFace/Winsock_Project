@@ -25,6 +25,7 @@ int CPolice::Update(void)
 void CPolice::Render(void)
 {
 	CObj::Render();
+	cout << "[Á÷  ¾÷] : " << "°æÂû" << endl;
 }
 
 void CPolice::Release(void)

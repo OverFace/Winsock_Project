@@ -18,5 +18,7 @@ void CObj::Render(void)
 
 void CObj::Create_NickName(void)
 {
+	cout << "    닉네임을 입력해 주세요!!!" << endl;
+	cout << "================================" << endl;
 	cin >> m_szNickName;
 }

@@ -13,6 +13,12 @@
     <Filter Include="02.Object\Monitor">
       <UniqueIdentifier>{d16a7efc-42e8-4017-9774-a3f80160fe78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="98.UDP_Server">
+      <UniqueIdentifier>{98d13c5b-2d33-4323-a3d1-d3ecfc86a6ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager">
+      <UniqueIdentifier>{2a34b13e-8d72-43de-adfd-1ab811fab44c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -24,16 +30,34 @@
     <ClInclude Include="MainGame.h">
       <Filter>01.MainGame</Filter>
     </ClInclude>
+    <ClInclude Include="Moniter.h">
+      <Filter>02.Object\Monitor</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>02.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeMgr.h">
+      <Filter>97.Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>99.Default</Filter>
     </ClCompile>
-    <ClCompile Include="WinsockProjectServer.cpp">
-      <Filter>99.Default</Filter>
-    </ClCompile>
     <ClCompile Include="MainGame.cpp">
       <Filter>01.MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="WinsockProjectServer.cpp">
+      <Filter>98.UDP_Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Moniter.cpp">
+      <Filter>02.Object\Monitor</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>02.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeMgr.cpp">
+      <Filter>97.Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
