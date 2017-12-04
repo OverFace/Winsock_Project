@@ -8,13 +8,14 @@ public:
 	~CMainGame_Client(void);
 
 private:
-	list<CObj*>		m_Client_List;
+	eJobType			m_eJobType;
+	CObj*				m_pPlayer;
 
 public: //Getter
-	inline list<CObj*>*	Get_Client_List(void) { return &m_Client_List; }
-	
+	inline CObj*		Get_Player(void) { return m_pPlayer; }
+
 public: //Setter
-	inline void			Add_Client_List(CObj* pObj) { m_Client_List.push_back(pObj); }
+	inline void			Set_JobType(eJobType _eType) { m_eJobType = _eType; }
 
 public:
 	void	Init(void);

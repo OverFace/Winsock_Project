@@ -12,7 +12,9 @@ CHuman::~CHuman(void)
 
 void CHuman::Init(void)
 {
-
+	m_tInfo.eJobType = JOB_HUMAN;
+	m_tInfo.iGet_Count = 0;
+	m_tInfo.bCheck = false;
 }
 
 int CHuman::Update(void)
@@ -22,8 +24,8 @@ int CHuman::Update(void)
 
 void CHuman::Render(void)
 {
-	//이객체가 보여줄 것들
-	cout << "[직업 : 시민] " << endl;
+	CObj::Render();
+	cout << "[직  업] : " << "시민" << endl;
 }
 
 void CHuman::Release(void)

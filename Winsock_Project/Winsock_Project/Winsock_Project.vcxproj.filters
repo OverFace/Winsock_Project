@@ -51,6 +51,15 @@
     <ClInclude Include="Voting.h">
       <Filter>01.Object\Voting</Filter>
     </ClInclude>
+    <ClInclude Include="Doctor.h">
+      <Filter>01.Object\Job\Doctor</Filter>
+    </ClInclude>
+    <ClInclude Include="Mafia.h">
+      <Filter>01.Object\Job\Mafia</Filter>
+    </ClInclude>
+    <ClInclude Include="Police.h">
+      <Filter>01.Object\Job\Police</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -70,6 +79,15 @@
     </ClCompile>
     <ClCompile Include="WinsockProject.cpp">
       <Filter>98.UDP_Client</Filter>
+    </ClCompile>
+    <ClCompile Include="Doctor.cpp">
+      <Filter>01.Object\Job\Doctor</Filter>
+    </ClCompile>
+    <ClCompile Include="Mafia.cpp">
+      <Filter>01.Object\Job\Mafia</Filter>
+    </ClCompile>
+    <ClCompile Include="Police.cpp">
+      <Filter>01.Object\Job\Police</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,8 @@
 #define PORTNUMBER  9000
 #define MAX_MEMCNT  10
 #define BUFSIZE     50
+#define MAX_PATH	256
+#define PURE		=0
 
 
 #endif // !define_h_
