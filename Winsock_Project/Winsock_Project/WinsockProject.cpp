@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "MainGame.h"
 
+
 int main()
 {
 	CMainGame_Client MainGame;
@@ -18,6 +19,6 @@ int main()
 		}
 	}
 
-	return 0;
+	
 }
 
