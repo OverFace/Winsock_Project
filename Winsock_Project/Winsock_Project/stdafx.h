@@ -17,12 +17,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <Windows.h>
+#include <process.h>
 
 #include "../Headers/Constant.h"
 #include "../Headers/Define.h"
 #include "../Headers/Enum.h"
 #include "../Headers/Struct.h"
 
+#include <string>
 #include <list>
 #include <vector>
 #include <algorithm>

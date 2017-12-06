@@ -8,6 +8,8 @@
 #define BUFSIZE     512
 #define MAX_PATH	256
 #define PURE		=0
+#define MAX_CLIENT	10
+#define ALLOW		65535
 
 #define DECLARE_SINGLETON(ClassName)		\
 	private:								\

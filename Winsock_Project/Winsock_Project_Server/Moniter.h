@@ -15,7 +15,7 @@ private:
 
 public: //Getter
 	inline eJobType* Get_JobArray(void) { return m_pJob_Array; }
-	inline bool		 Get_GameState(eGameStateType _Type) { return m_bGame_StateCheck[_Type]; }
+	inline bool*	 Get_GameState(void) { return m_bGame_StateCheck; }
 
 public:
 	virtual	void	Init(void);

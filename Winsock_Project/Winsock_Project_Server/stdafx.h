@@ -21,8 +21,10 @@
 #include <WS2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <Windows.h>
+#include <Windows.h> 
+#include <process.h>
 
+#include <string>
 #include <list>
 #include <vector>
 #include <iostream>

@@ -7,9 +7,12 @@
 int			m_iRetavl;					//Retval
 WSADATA		m_wsaInfo;					//WSA Struct
 SOCKET		m_Socket;					//Socket Struct
-SOCKADDR_IN m_Remote_Addr;				//SOCKADDR_IN Struct
-char		m_szBuf[BUFSIZE + 1];		//Data Container
-int			m_iLen;						//Buf Length
+SOCKADDR_IN m_Server_Addr;				//SOCKADDR_IN Struct
+char		m_szBuf[BUFSIZE + 1];
+
+//Thread
+void		recv_thread(void*);
+HANDLE		m_hMutex;
 
 void err_quit(char * msg)
 {
@@ -36,35 +39,84 @@ void err_display(char * msg)
 	LocalFree(lpMsgBuf);
 }
 
+int recvn(SOCKET s, char* buf, int len, int flags)
+{
+	int received;
+	char* ptr = buf;
+	int left = len;
+
+	while (left > 0)
+	{
+		received = recv(s, ptr, left, flags);
+		if (received == SOCKET_ERROR)
+		{
+			return SOCKET_ERROR;
+		}
+		else if (received == 0)
+		{
+			break;
+		}
+
+		left -= received;
+		ptr += received;
+	}
+}
+
 int main(void)
 {
-	//Main Game Allocate
-	CMainGame_Client MainGame;
-	MainGame.Set_JobType(JOB_MAFIA);
-	MainGame.Init();
-
 #pragma region Window Socket
+	//Create Mutex
+	m_hMutex = CreateMutex(NULL, FALSE, FALSE);
+	if (!m_hMutex)
+		return 1;
+
 	//Init Winsock
 	if (WSAStartup(MAKEWORD(2, 2), &m_wsaInfo) != 0)
 		return 1;
 
 	//Create Socket
-	m_Socket = socket(AF_INET, SOCK_DGRAM, 0);
+	m_Socket = socket(AF_INET, SOCK_STREAM, 0);
 	if (m_Socket == INVALID_SOCKET)
 		err_quit("socket()");
 
-	//Setting Multi Cast TLL
-	int ttl = 2;
-	m_iRetavl = setsockopt(m_Socket, IPPROTO_IP, IP_MULTICAST_TTL, (char*)&ttl, sizeof(ttl));
-	if (m_iRetavl == SOCKET_ERROR)
-		err_quit("setsockopt()");
-
 	//Init Socket Address Struct
-	ZeroMemory(&m_Remote_Addr, sizeof(m_Remote_Addr));
-	m_Remote_Addr.sin_family = AF_INET;
-	m_Remote_Addr.sin_addr.s_addr = inet_addr(MULTICASTIP);
-	m_Remote_Addr.sin_port = htons(PORTNUMBER);
+	ZeroMemory(&m_Server_Addr, sizeof(m_Server_Addr));
+	m_Server_Addr.sin_family = AF_INET;
+	m_Server_Addr.sin_addr.s_addr = inet_addr(SERVERIP);
+	m_Server_Addr.sin_port = htons(PORTNUMBER);
 #pragma endregion
+
+	//Connect
+	if (connect(m_Socket, (SOCKADDR*)&m_Server_Addr, sizeof(m_Server_Addr)) == SOCKET_ERROR)
+	{
+		closesocket(m_Socket);
+		WSACleanup();
+		return 1;
+	}
+	
+	CMainGame_Client MainGame;
+	int	ijobType;
+
+	m_iRetavl = recvn(m_Socket, m_szBuf, BUFSIZE, 0);
+	
+	if (!strcmp("가득찼습니다.\n", m_szBuf))
+	{
+		printf("%s", "I'm sorry. The room is full\n");
+		closesocket(m_Socket);
+		WSACleanup();
+		return 0;
+	}
+
+	//Main Game Allocate
+	ijobType = atoi(m_szBuf);
+	MainGame.Set_JobType(eJobType(ijobType));
+	MainGame.Init();
+
+	//Thread
+	//_beginthread(recv_thread, 0, NULL);
+
+	//채팅방 보내는 메세지는 스레드로 넣을 필요 없고 MainGame에서
+	//낮일때 돌려주자.
 
 	while (true)
 	{
@@ -76,27 +128,19 @@ int main(void)
 		}
 		MainGame.Render();
 
-		//임시로 교제에 있는 그대로 데이터 통신을 하게 한다.
+		//서버에서 받은 게임 상태 값에 따른 게임 진행을 이제 짜야 된다.
+
 		//Data Input
-		cout << "보낼 데이터 : ";
-		cin >> m_szBuf;
-		if (m_szBuf == NULL)
-			break;
+		//MainGame.Data_Input();
 
-		//'\n' 문자 제거
-		m_iLen = strlen(m_szBuf);
-		if (m_szBuf[m_iLen - 1] == '\n')
-			m_szBuf[m_iLen - 1] = '\0';
-		if (strlen(m_szBuf) == 0)
-			break;
+		//Data Send
+		//m_iRetavl = MainGame.Data_Send(&m_Socket, &m_Server_Addr, m_iRetavl);
 
-		//Send Data
-		m_iRetavl = sendto(m_Socket, m_szBuf, strlen(m_szBuf), 0, (SOCKADDR*)&m_Remote_Addr, sizeof(m_Remote_Addr));
-		if (m_iRetavl == SOCKET_ERROR)
-		{
-			err_display("sendto()");
-			continue;
-		}
+		//Data Recv
+		//m_iRetavl = MainGame.Data_Recv(&m_Socket, &m_Server_Addr, m_iRetavl);
+
+		//Data Render
+		//MainGame.Data_Render(m_iRetavl);
 	}
 
 	//Close Socket
@@ -107,4 +151,27 @@ int main(void)
 	return 0;
 }
 
+void recv_thread(void* pData)
+{
+	int iRetval_Thread = 65535;
+	char buff_Thread[BUFSIZE] = { 0 };
+
+	while (iRetval_Thread != INVALID_SOCKET || iRetval_Thread != SOCKET_ERROR)
+	{
+		Sleep(10);
+
+		iRetval_Thread = recv(m_Socket, buff_Thread, sizeof(buff_Thread), 0);
+
+		if (iRetval_Thread == INVALID_SOCKET || iRetval_Thread == SOCKET_ERROR)
+			break;
+
+		memset(buff_Thread, 0, BUFSIZE);
+	}
+
+	WaitForSingleObject(m_hMutex, 100L);
+	m_iRetavl = INVALID_SOCKET;
+	ReleaseMutex(m_hMutex);
+
+	return;
+}
 

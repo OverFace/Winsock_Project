@@ -15,6 +15,7 @@ CMainGame_Client::CMainGame_Client(void)
 {
 	m_eJobType = JOB_END;
 	m_pPlayer = NULL;
+	ZeroMemory(&m_Peer_Addr, sizeof(m_Peer_Addr));
 }
 
 CMainGame_Client::~CMainGame_Client(void)
@@ -63,7 +64,7 @@ int CMainGame_Client::Update(void)
 
 void CMainGame_Client::Render(void)
 {
-	Sleep(500);
+	Sleep(100);
 	system("cls");
 	cout << "==================================================================" << endl;
 	cout << "||                         MAFIA GAME                           ||" << endl;
@@ -80,3 +81,58 @@ void CMainGame_Client::Release(void)
 
 	CTimeMgr::GetInstance()->DestroyInstance();
 }
+
+void CMainGame_Client::Data_Input(void)
+{
+	//Data Input Function
+	cout << "보넬 데이터 : ";
+	if (fgets(m_szBuf, BUFSIZE + 1, stdin) == NULL)
+		return;
+}
+
+int CMainGame_Client::Data_Send(SOCKET * pSocket, SOCKADDR_IN* pServer_Addr, int iRetval)
+{
+	//'\n'문자 제거
+	m_iLen = strlen(m_szBuf);
+	if (m_szBuf[m_iLen - 1] == '\n')
+		m_szBuf[m_iLen - 1] = '\0';
+
+	if (strlen(m_szBuf) == 0)
+		return -1;
+
+	iRetval = sendto(*pSocket, m_szBuf, strlen(m_szBuf), 0, (SOCKADDR*)pServer_Addr, sizeof(*pServer_Addr));
+	if (iRetval == SOCKET_ERROR)
+	{
+		cout << "Client : 보내기 에러 " << endl;
+		return -1;
+	}
+
+	return iRetval;
+}
+
+int CMainGame_Client::Data_Recv(SOCKET* pSocket, SOCKADDR_IN* pServer_Addr, int iRetval)
+{
+	m_iAddr_Len = sizeof(m_Peer_Addr);
+
+	iRetval = recvfrom(*pSocket, m_szBuf, BUFSIZE, 0, (SOCKADDR*)&m_Peer_Addr, &m_iAddr_Len);
+	if (iRetval == SOCKET_ERROR)
+	{
+		cout << "Client : 받기 에러" << endl;
+		return -1;
+	}
+
+	if (memcmp(&m_Peer_Addr, pServer_Addr, sizeof(m_Peer_Addr)))
+	{
+		cout << "잘못된 데이터 입니다." << endl;
+		return -1;
+	}
+
+	return iRetval;
+}
+
+void CMainGame_Client::Data_Render(int iRetval)
+{
+	m_szBuf[iRetval] = '\0';
+	printf("%s\n", m_szBuf);
+}
+
